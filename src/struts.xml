@@ -8,7 +8,7 @@
 	<package name="hibernate" extends="struts-default">
 		
 		<action name="savePerson" class="com.shengsiyuan.action.PersonAction" method="savePerson">
-		
+			<result name="success">/listAll.jsp</result>
 		</action>
 		
 	</package>

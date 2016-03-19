@@ -1,6 +1,11 @@
 package com.shengsiyuan.action;
 
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.shengsiyuan.model.Person;
@@ -55,6 +60,14 @@ public class PersonAction extends ActionSupport {
 		
 		PersonService service = new PersonServiceImpl();
 		service.savePerson(person);
+		
+		List<Person> list = service.listAllPersons();
+		
+		System.out.println(list);
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		
+		request.setAttribute("list", list);
 		
 		return SUCCESS;
 	}
