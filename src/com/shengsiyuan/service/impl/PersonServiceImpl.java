@@ -19,4 +19,16 @@ public class PersonServiceImpl implements PersonService {
 		PersonDAO dao = new PersonDAOImpl();
 		return dao.listAllPersons();
 	}
+
+	@Override
+	public void deletePerson(int id) {
+		PersonDAO dao = new PersonDAOImpl();
+		dao.removePerson(id);
+	}
+
+	@Override
+	public Person getSinglePersonById(int id) {
+		PersonDAO dao = new PersonDAOImpl();
+		return dao.getSinglePerson(id);
+	}
 }

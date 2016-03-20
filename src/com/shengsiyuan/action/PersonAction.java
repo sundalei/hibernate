@@ -19,11 +19,21 @@ public class PersonAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private int id;
+	
 	private String username;
 	
 	private String password;
 	
 	private int age;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;
@@ -61,9 +71,32 @@ public class PersonAction extends ActionSupport {
 		PersonService service = new PersonServiceImpl();
 		service.savePerson(person);
 		
+		/*
 		List<Person> list = service.listAllPersons();
 		
-		System.out.println(list);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		
+		request.setAttribute("list", list);
+		*/
+		
+		return SUCCESS;
+	}
+	
+	public String listAllUsers() throws Exception {
+		PersonService service = new PersonServiceImpl();
+		List<Person> list = service.listAllPersons();
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("list", list);
+		
+		return SUCCESS;
+	}
+	
+	public String deletePerson() throws Exception {
+		PersonService service = new PersonServiceImpl();
+		service.deletePerson(id);
+		
+		List<Person> list = service.listAllPersons();
 		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		
@@ -72,4 +105,13 @@ public class PersonAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String getSinglePerson() throws Exception {
+		PersonService service = new PersonServiceImpl();
+		Person person = service.getSinglePersonById(id);
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("person", person);
+		
+		return SUCCESS;
+	}
 }

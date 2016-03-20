@@ -23,6 +23,18 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 
+<script type="text/javascript">
+
+
+	function del() {
+
+		if (confirm("确定删除吗")) {
+			return true;
+		}
+		return false;
+	}
+</script>
+
 </head>
 
 <body>
@@ -37,15 +49,15 @@
 			<th>delete</th>
 		</tr>
 
-		<s:iterator value="#request.list">
+		<s:iterator value="#request.list" var="person">
 
 			<tr>
-				<td><s:a href="getSinglePerson.action?id=1"><s:property value="username"></s:property></s:a></td>
+				<td><s:a href="getSinglePerson.action?id=%{#person.id}"><s:property value="username"></s:property></s:a></td>
 				<td><s:property value="password" /></td>
 				<td><s:property value="age" /></td>
 				<td><s:property value="registerDate" /></td>
-				<td>update</td>
-				<td>delete</td>
+				<td><s:a href="updatePPerson.action?id=%{#person.id}">update</s:a></td>
+				<td><s:a href="deletePerson.action?id=%{#person.id}" onclick="return del();">delete</s:a></td>
 			</tr>
 
 		</s:iterator>
